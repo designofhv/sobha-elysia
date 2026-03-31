@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sobha Elysia | Ultra Luxury Real Estate</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+    
+    body {
+      background-color: #050505;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background-color: #d4af37;
+      color: black;
+    }
+
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Montserrat', sans-serif; }
+    
+    .gold-gradient-text {
+      background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .glass-panel {
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .gold-glow {
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+    
+    .hover-gold-glow:hover {
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+      border-color: rgba(212, 175, 55, 0.6);
+    }
+
+    /* Cinematic Entrance Animations (Hero) */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+    
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* Scroll Reveal Animations */
+    .reveal, .reveal-left, .reveal-right, .reveal-scale {
+      opacity: 0;
+      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal {
+      transform: translateY(40px);
+    }
+    
+    .reveal-left {
+      transform: translateX(-50px);
+    }
+    
+    .reveal-right {
+      transform: translateX(50px);
+    }
+    
+    .reveal-scale {
+      transform: scale(0.92);
+    }
+
+    .reveal.active, .reveal-left.active, .reveal-right.active, .reveal-scale.active {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+
+    /* Hide scrollbar for gallery but keep functionality */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    /* Prevent mobile horizontal overflow completely */
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-4 md:py-6 border-b border-transparent">
+    <div class="max-w-7xl mx-auto px-5 md:px-12 flex justify-between items-center">
+      
+      <!-- Brand Logo (Optimized for 1080x1080 square format) -->
+      <a href="#" class="cursor-pointer relative z-50 flex items-center">
+        <img src="LOGO.png" alt="Sobha Elysia Logo" class="h-16 md:h-20 w-16 md:w-20 object-contain drop-shadow-md transition-all duration-300">
+      </a>
+      
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center space-x-8 text-sm tracking-wider font-light">
+        <a href="#about" class="hover:text-[#d4af37] transition-colors duration-300">The Vision</a>
+        <a href="#amenities" class="hover:text-[#d4af37] transition-colors duration-300">Amenities</a>
+        <a href="#residences" class="hover:text-[#d4af37] transition-colors duration-300">Residences</a>
+        <a href="#projects" class="hover:text-[#d4af37] transition-colors duration-300">Legacy</a>
+        <a href="#contact" class="px-6 py-2.5 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-300 rounded-sm font-medium">
+          Enquire Now
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-btn" class="lg:hidden text-[#d4af37] relative z-50 p-2 -mr-2">
+        <i data-lucide="menu" id="menu-icon" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PREMIUM Mobile Nav Overlay (Moved outside of Nav to fix mobile height bugs) -->
+  <div id="mobile-menu" class="fixed inset-0 bg-[#050505]/98 backdrop-blur-3xl z-40 flex flex-col justify-start items-center pt-32 pb-10 opacity-0 pointer-events-none transition-opacity duration-500 overflow-y-auto">
+    <div class="flex flex-col items-center space-y-6 sm:space-y-8 w-full px-6">
+      <a href="#about" class="mobile-link text-xl sm:text-2xl font-serif tracking-widest text-white hover:text-[#d4af37] transition-colors">The Vision</a>
+      <div class="w-10 h-[1px] bg-white/10"></div>
+      <a href="#amenities" class="mobile-link text-xl sm:text-2xl font-serif tracking-widest text-white hover:text-[#d4af37] transition-colors">Amenities</a>
+      <div class="w-10 h-[1px] bg-white/10"></div>
+      <a href="#residences" class="mobile-link text-xl sm:text-2xl font-serif tracking-widest text-white hover:text-[#d4af37] transition-colors">Residences</a>
+      <div class="w-10 h-[1px] bg-white/10"></div>
+      <a href="#projects" class="mobile-link text-xl sm:text-2xl font-serif tracking-widest text-white hover:text-[#d4af37] transition-colors">Legacy</a>
+      <div class="w-10 h-[1px] bg-white/10"></div>
+      <a href="#location" class="mobile-link text-xl sm:text-2xl font-serif tracking-widest text-white hover:text-[#d4af37] transition-colors">Location</a>
+      
+      <a href="#contact" class="mobile-link text-sm sm:text-base tracking-[0.2em] text-[#050505] bg-[#d4af37] px-8 py-3.5 w-full max-w-[250px] text-center font-medium mt-4 rounded-sm">Enquire Now</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[100svh] w-full flex flex-col items-center justify-between overflow-hidden pt-28 md:pt-32 pb-8 md:pb-12">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="1.jpg" 
+        alt="Luxury High Rise Night" 
+        class="w-full h-full object-cover object-center scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#050505]"></div>
+      <!-- Soft Gold Glow Effect -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[60vw] h-[80vw] md:h-[60vw] bg-[#d4af37]/15 rounded-full blur-[100px] md:blur-[120px] pointer-events-none"></div>
+    </div>
+
+    <!-- Main Content Vertically Centered -->
+    <div class="relative z-10 text-center px-5 w-full max-w-5xl mx-auto flex flex-col items-center justify-center flex-grow">
+      <p class="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[#d4af37] text-xs md:text-base mb-4 md:mb-6 animate-fade-in-up font-medium">
+        Not Just a Home. A Statement.
+      </p>
+      
+      <!-- Responsive Typography -->
+      <h1 class="text-[2.75rem] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-5 md:mb-6 animate-fade-in-up delay-100 drop-shadow-2xl px-2">
+        A New Standard of <br />
+        <span class="italic font-light text-white/95">Luxury</span> Living
+      </h1>
+      
+      <p class="text-sm sm:text-base md:text-xl text-white/80 font-light max-w-2xl mx-auto mb-8 md:mb-12 animate-fade-in-up delay-200 tracking-wide px-4">
+        Sobha Elysia at GIFT City — Where Elegance Meets Intelligence.
+      </p>
+      
+      <!-- Responsive Buttons (Stack on mobile, side-by-side on tablet+) -->
+      <div class="flex flex-col sm:flex-row items-center justify-center w-full max-w-md sm:max-w-none space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up delay-300">
+        <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-black text-sm md:text-base font-semibold tracking-wider hover:scale-105 transition-transform duration-300 rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center justify-center group">
+          Book a Private Tour
+          <i data-lucide="arrow-right" class="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+        <button id="explore-btn" class="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 border border-[#d4af37] text-[#d4af37] text-sm md:text-base font-semibold tracking-wider hover:bg-[#d4af37]/10 transition-colors duration-300 rounded-sm glass-panel flex items-center justify-center group">
+          Explore Residences
+          <i data-lucide="play" class="ml-2 w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+        </button>
+      </div>
+
+      <!-- Floating Price Tag -->
+      <div onclick="document.getElementById('residences').scrollIntoView({behavior: 'smooth'})" class="mt-10 md:mt-16 inline-block animate-fade-in-up delay-500 relative group cursor-pointer w-[90%] sm:w-auto">
+        <div class="absolute inset-0 bg-[#d4af37] blur-lg md:blur-md opacity-15 group-hover:opacity-30 transition-opacity duration-500 rounded-full"></div>
+        <div class="relative border border-[#d4af37]/40 bg-[#0a0a0a]/80 backdrop-blur-md px-4 sm:px-6 py-3.5 md:py-4 rounded-full flex flex-row items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+          <!-- Gold Dot -->
+          <span class="w-1.5 h-1.5 rounded-full bg-[#d4af37] opacity-80 mr-3 shadow-[0_0_8px_#d4af37]"></span>
+          <!-- Text -->
+          <span class="text-white/70 text-[9px] sm:text-[10px] md:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-light mr-3 sm:mr-4 whitespace-nowrap">Exclusive Collection From</span>
+          <!-- Divider Line -->
+          <div class="w-[1px] h-4 md:h-6 bg-[#d4af37]/30 mr-3 sm:mr-4"></div>
+          <!-- Price -->
+          <span class="text-[#d4af37] text-base sm:text-lg md:text-xl font-serif font-bold tracking-wide whitespace-nowrap">₹2.47 Cr*</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator positioned cleanly at the bottom flex slot -->
+    <div class="relative z-10 flex flex-col items-center animate-bounce text-white/50 mt-10 md:mt-12 h-16 md:h-20">
+      <span class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] mb-2 opacity-80">Scroll to Discover</span>
+      <div class="w-[1px] flex-grow bg-gradient-to-b from-[#d4af37]/70 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- Signature Highlights Section -->
+  <section class="py-16 md:py-24 relative border-b border-white/5 bg-[#050505]">
+    <div class="max-w-7xl mx-auto px-5 md:px-12">
+      <div class="text-center mb-10 md:mb-16 reveal">
+        <h2 class="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#d4af37] mb-3 md:mb-4">Signature Highlights</h2>
+        <div class="w-16 md:w-24 h-[1px] bg-[#d4af37] mx-auto opacity-50"></div>
+      </div>
+      
+      <!-- Responsive Grid: 2 cols on mobile, 3 tablet, 5 desktop -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 lg:gap-12">
+        <div class="flex flex-col items-center text-center group cursor-pointer p-4 bg-[#0a0a0a] border border-white/5 hover:border-[#d4af37]/20 rounded-sm lg:border-none lg:bg-transparent lg:p-0 transition-all reveal" style="transition-delay: 100ms;">
+          <div class="w-14 h-14 md:w-20 md:h-20 rounded-full border border-[#d4af37]/30 flex items-center justify-center mb-4 md:mb-6 text-[#d4af37] group-hover:bg-[#d4af37]/10 group-hover:border-[#d4af37] transition-all duration-500 group-hover:scale-110">
+            <i data-lucide="building-2" stroke-width="1.5" class="w-7 h-7 md:w-10 md:h-10"></i>
+          </div>
+          <h3 class="text-[10px] md:text-sm tracking-widest uppercase font-light text-white/80 group-hover:text-white transition-colors leading-relaxed whitespace-pre-line">Ultra Luxury<br>Residences</h3>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-pointer p-4 bg-[#0a0a0a] border border-white/5 hover:border-[#d4af37]/20 rounded-sm lg:border-none lg:bg-transparent lg:p-0 transition-all reveal" style="transition-delay: 200ms;">
+          <div class="w-14 h-14 md:w-20 md:h-20 rounded-full border border-[#d4af37]/30 flex items-center justify-center mb-4 md:mb-6 text-[#d4af37] group-hover:bg-[#d4af37]/10 group-hover:border-[#d4af37] transition-all duration-500 group-hover:scale-110">
+            <i data-lucide="cloud-sun" stroke-width="1.5" class="w-7 h-7 md:w-10 md:h-10"></i>
+          </div>
+          <h3 class="text-[10px] md:text-sm tracking-widest uppercase font-light text-white/80 group-hover:text-white transition-colors leading-relaxed whitespace-pre-line">Sky Lounge<br>At 32nd Floor</h3>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-pointer p-4 bg-[#0a0a0a] border border-white/5 hover:border-[#d4af37]/20 rounded-sm lg:border-none lg:bg-transparent lg:p-0 transition-all reveal" style="transition-delay: 300ms;">
+          <div class="w-14 h-14 md:w-20 md:h-20 rounded-full border border-[#d4af37]/30 flex items-center justify-center mb-4 md:mb-6 text-[#d4af37] group-hover:bg-[#d4af37]/10 group-hover:border-[#d4af37] transition-all duration-500 group-hover:scale-110">
+            <i data-lucide="home" stroke-width="1.5" class="w-7 h-7 md:w-10 md:h-10"></i>
+          </div>
+          <h3 class="text-[10px] md:text-sm tracking-widest uppercase font-light text-white/80 group-hover:text-white transition-colors leading-relaxed whitespace-pre-line">20,000 sq.ft<br>Clubhouse</h3>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-pointer p-4 bg-[#0a0a0a] border border-white/5 hover:border-[#d4af37]/20 rounded-sm lg:border-none lg:bg-transparent lg:p-0 transition-all reveal" style="transition-delay: 400ms;">
+          <div class="w-14 h-14 md:w-20 md:h-20 rounded-full border border-[#d4af37]/30 flex items-center justify-center mb-4 md:mb-6 text-[#d4af37] group-hover:bg-[#d4af37]/10 group-hover:border-[#d4af37] transition-all duration-500 group-hover:scale-110">
+            <i data-lucide="map-pin" stroke-width="1.5" class="w-7 h-7 md:w-10 md:h-10"></i>
+          </div>
+          <h3 class="text-[10px] md:text-sm tracking-widest uppercase font-light text-white/80 group-hover:text-white transition-colors leading-relaxed whitespace-pre-line">Located in<br>GIFT City</h3>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-pointer p-4 bg-[#0a0a0a] border border-white/5 hover:border-[#d4af37]/20 rounded-sm lg:border-none lg:bg-transparent lg:p-0 transition-all col-span-2 md:col-span-1 lg:col-span-1 reveal" style="transition-delay: 500ms;">
+          <div class="w-14 h-14 md:w-20 md:h-20 rounded-full border border-[#d4af37]/30 flex items-center justify-center mb-4 md:mb-6 text-[#d4af37] mx-auto group-hover:bg-[#d4af37]/10 group-hover:border-[#d4af37] transition-all duration-500 group-hover:scale-110">
+            <i data-lucide="footprints" stroke-width="1.5" class="w-7 h-7 md:w-10 md:h-10"></i>
+          </div>
+          <h3 class="text-[10px] md:text-sm tracking-widest uppercase font-light text-white/80 group-hover:text-white transition-colors leading-relaxed whitespace-pre-line">Pedestrian-First<br>Design</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section (Split) -->
+  <section id="about" class="py-20 md:py-32 relative overflow-hidden bg-[#050505]">
+    <div class="absolute top-0 right-0 w-full md:w-1/3 h-[50vh] md:h-full bg-[#d4af37]/5 blur-[100px] md:blur-[150px] pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-5 md:px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+      <div class="w-full lg:w-1/2 space-y-6 md:space-y-8 z-10 text-center lg:text-left reveal-left">
+        <h3 class="text-[10px] md:text-sm uppercase tracking-[0.3em] text-[#d4af37]">Crafted for the Exceptional Few</h3>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight gold-gradient-text">
+          Architectural <br class="hidden sm:block"/> Brilliance Redefined
+        </h2>
+        <p class="text-sm md:text-lg text-white/70 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+          Crafted across 2.65 acres with 35 floors of architectural brilliance, Sobha Elysia redefines elevated living. Every detail is meticulously planned to offer a sanctuary of peace amidst the vibrant energy of the city.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="flex justify-center lg:justify-start gap-10 md:gap-16 pt-6 md:pt-8 border-t border-white/10 mt-6 md:mt-8">
+          <div class="relative text-left">
+            <div class="absolute -left-3 top-0 w-0.5 h-full bg-gradient-to-b from-[#d4af37] to-transparent"></div>
+            <div class="text-3xl md:text-4xl font-serif text-white mb-1 md:mb-2 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">35</div>
+            <div class="text-[9px] md:text-xs uppercase tracking-[0.2em] md:tracking-widest text-[#d4af37]">Iconic Floors</div>
+          </div>
+          <div class="relative text-left">
+            <div class="absolute -left-3 top-0 w-0.5 h-full bg-gradient-to-b from-[#d4af37] to-transparent"></div>
+            <div class="text-3xl md:text-4xl font-serif text-white mb-1 md:mb-2 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">2.65</div>
+            <div class="text-[9px] md:text-xs uppercase tracking-[0.2em] md:tracking-widest text-[#d4af37]">Acres of Luxury</div>
+          </div>
+        </div>
+
+        <div class="pt-6 md:pt-8 flex justify-center lg:justify-start">
+          <button onclick="document.getElementById('residences').scrollIntoView({behavior: 'smooth'})" class="pb-2 border-b border-[#d4af37] text-[#d4af37] uppercase tracking-widest text-xs md:text-sm font-medium hover:text-white hover:border-white transition-all duration-300 flex items-center group">
+            Discover The Vision
+            <i data-lucide="arrow-right" class="ml-2 md:ml-3 w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Fixed Mobile Image Breakout -->
+      <div class="w-full lg:w-1/2 relative mt-8 lg:mt-0 px-3 md:px-0 reveal-right">
+        <div class="absolute inset-0 border border-[#d4af37]/40 translate-x-3 translate-y-3 md:translate-x-8 md:translate-y-8 rounded-sm z-0"></div>
+        <img 
+          src="2.jpg" 
+          alt="Luxury Architecture" 
+          class="relative z-10 w-full h-[350px] sm:h-[450px] md:h-[500px] object-cover rounded-sm shadow-2xl filter brightness-90 contrast-125"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- The Sky Lounge Experience (Hero Feature Section) -->
+  <section class="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden group">
+    <div class="absolute inset-0">
+      <img 
+        src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+        alt="Sky Lounge" 
+        class="w-full h-full object-cover md:group-hover:scale-105 transition-transform duration-[10s] ease-out"
+      />
+      <div class="absolute inset-0 bg-black/70 md:group-hover:bg-black/40 transition-colors duration-1000"></div>
+    </div>
+    
+    <div class="relative z-10 text-center px-5 max-w-4xl mx-auto reveal-scale">
+      <h2 class="text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.5em] text-[#d4af37] mb-4 md:mb-6 drop-shadow-lg">
+        Luxury, Elevated to Intelligence
+      </h2>
+      <h3 class="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-white mb-6 md:mb-8 leading-tight drop-shadow-2xl">
+        Rise Above the City — <br class="hidden sm:block"/>
+        <span class="italic font-light text-white/90">35 Floors of Pure Indulgence</span>
+      </h3>
+      <button onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})" class="px-6 md:px-8 py-3 glass-panel text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs md:text-sm rounded-sm backdrop-blur-md font-medium">
+        View Gallery
+      </button>
+    </div>
+  </section>
+
+  <!-- Amenities (Luxury Card Layout) -->
+  <section id="amenities" class="py-20 md:py-32 bg-[#080808] relative">
+    <div class="max-w-7xl mx-auto px-5 md:px-12">
+      <div class="text-center mb-12 md:mb-20 reveal">
+        <h2 class="text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#d4af37] mb-3 md:mb-4">Curated Lifestyle</h2>
+        <h3 class="text-3xl md:text-5xl font-serif text-white">Bespoke Amenities</h3>
+        <div class="w-12 md:w-16 h-[1px] bg-[#d4af37] mx-auto mt-6 md:mt-8 opacity-50"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <!-- Amenity Cards with controlled padding -->
+        <div class="bg-[#0a0a0a] border border-white/5 p-8 md:p-10 rounded-sm hover-gold-glow transition-all duration-500 group cursor-default text-center sm:text-left reveal" style="transition-delay: 100ms;">
+          <div class="text-[#d4af37] mb-5 md:mb-6 flex justify-center sm:justify-start lg:group-hover:scale-110 transition-transform duration-500 origin-left">
+            <i data-lucide="waves" class="w-8 h-8 md:w-10 md:h-10"></i>
+          </div>
+          <h4 class="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 tracking-wide">Infinity Pool</h4>
+          <p class="text-white/60 font-light text-xs md:text-sm leading-relaxed">Temperature-controlled waters merging with the horizon.</p>
+        </div>
+        
+        <div class="bg-[#0a0a0a] border border-white/5 p-8 md:p-10 rounded-sm hover-gold-glow transition-all duration-500 group cursor-default text-center sm:text-left reveal" style="transition-delay: 200ms;">
+          <div class="text-[#d4af37] mb-5 md:mb-6 flex justify-center sm:justify-start lg:group-hover:scale-110 transition-transform duration-500 origin-left">
+            <i data-lucide="dumbbell" class="w-8 h-8 md:w-10 md:h-10"></i>
+          </div>
+          <h4 class="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 tracking-wide">Elite Gymnasium</h4>
+          <p class="text-white/60 font-light text-xs md:text-sm leading-relaxed">State-of-the-art equipment with panoramic city views.</p>
+        </div>
+
+        <div class="bg-[#0a0a0a] border border-white/5 p-8 md:p-10 rounded-sm hover-gold-glow transition-all duration-500 group cursor-default text-center sm:text-left reveal" style="transition-delay: 300ms;">
+          <div class="text-[#d4af37] mb-5 md:mb-6 flex justify-center sm:justify-start lg:group-hover:scale-110 transition-transform duration-500 origin-left">
+            <i data-lucide="activity" class="w-8 h-8 md:w-10 md:h-10"></i>
+          </div>
+          <h4 class="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 tracking-wide">Yoga Deck</h4>
+          <p class="text-white/60 font-light text-xs md:text-sm leading-relaxed">Elevated platforms for mindful mornings.</p>
+        </div>
+
+        <div class="bg-[#0a0a0a] border border-white/5 p-8 md:p-10 rounded-sm hover-gold-glow transition-all duration-500 group cursor-default text-center sm:text-left reveal" style="transition-delay: 400ms;">
+          <div class="text-[#d4af37] mb-5 md:mb-6 flex justify-center sm:justify-start lg:group-hover:scale-110 transition-transform duration-500 origin-left">
+            <i data-lucide="flower-2" class="w-8 h-8 md:w-10 md:h-10"></i>
+          </div>
+          <h4 class="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 tracking-wide">Meditation Garden</h4>
+          <p class="text-white/60 font-light text-xs md:text-sm leading-relaxed">Lush, quiet enclaves designed for ultimate serenity.</p>
+        </div>
+
+        <div class="bg-[#0a0a0a] border border-white/5 p-8 md:p-10 rounded-sm hover-gold-glow transition-all duration-500 group cursor-default text-center sm:text-left reveal" style="transition-delay: 500ms;">
+          <div class="text-[#d4af37] mb-5 md:mb-6 flex justify-center sm:justify-start lg:group-hover:scale-110 transition-transform duration-500 origin-left">
+            <i data-lucide="baby" class="w-8 h-8 md:w-10 md:h-10"></i>
+          </div>
+          <h4 class="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 tracking-wide">Kids Play Area</h4>
+          <p class="text-white/60 font-light text-xs md:text-sm leading-relaxed">Safe, interactive spaces for the younger residents.</p>
+        </div>
+
+        <div class="bg-[#0a0a0a] border border-white/5 p-8 md:p-10 rounded-sm hover-gold-glow transition-all duration-500 group cursor-default text-center sm:text-left reveal" style="transition-delay: 600ms;">
+          <div class="text-[#d4af37] mb-5 md:mb-6 flex justify-center sm:justify-start lg:group-hover:scale-110 transition-transform duration-500 origin-left">
+            <i data-lucide="tree-pine" class="w-8 h-8 md:w-10 md:h-10"></i>
+          </div>
+          <h4 class="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 tracking-wide">Jogging Track</h4>
+          <p class="text-white/60 font-light text-xs md:text-sm leading-relaxed">Rubberized tracks winding through landscaped greens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery (Cinematic Scroll Concept) -->
+  <section id="gallery" class="py-16 md:py-24 overflow-hidden relative border-y border-white/5 bg-[#050505]">
+    <div class="max-w-7xl mx-auto px-5 md:px-12 mb-8 md:mb-12 flex justify-between items-end reveal">
+      <div>
+        <h2 class="text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#d4af37] mb-2 md:mb-4">Visual Journey</h2>
+        <h3 class="text-2xl sm:text-3xl md:text-4xl font-serif text-white">A Glimpse of Perfection</h3>
+      </div>
+      <div class="hidden md:flex space-x-4">
+         <div id="slide-left" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-[#d4af37] transition-all cursor-pointer">
+           <i data-lucide="arrow-right" class="w-4 h-4 rotate-180"></i>
+         </div>
+         <div id="slide-right" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-[#d4af37] transition-all cursor-pointer">
+           <i data-lucide="arrow-right" class="w-4 h-4"></i>
+         </div>
+      </div>
+    </div>
+    
+    <!-- Horizontal Scroll Area -->
+    <div id="gallery-slider" class="flex space-x-4 md:space-x-6 px-5 md:px-12 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide reveal-right scroll-smooth">
+      <!-- Image Cards -->
+      <div class="w-[85vw] sm:w-[60vw] md:w-[600px] h-[300px] md:h-[500px] relative group overflow-hidden rounded-sm snap-center flex-shrink-0 cursor-pointer">
+        <img src="3.png" alt="Gallery" class="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-110 filter grayscale-[20%]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 md:opacity-60 md:group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute bottom-6 left-6 transform translate-y-0 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-500">
+          <p class="text-[#d4af37] text-[10px] uppercase tracking-widest mb-1 md:mb-2">Signature Interior</p>
+          <p class="text-white font-serif text-lg md:text-xl">The Grand Living</p>
+        </div>
+      </div>
+      <div class="w-[85vw] sm:w-[60vw] md:w-[600px] h-[300px] md:h-[500px] relative group overflow-hidden rounded-sm snap-center flex-shrink-0 cursor-pointer">
+        <img src="4.png" alt="Gallery" class="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-110 filter grayscale-[20%]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 md:opacity-60 md:group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute bottom-6 left-6 transform translate-y-0 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-500">
+          <p class="text-[#d4af37] text-[10px] uppercase tracking-widest mb-1 md:mb-2">Master Bedroom</p>
+          <p class="text-white font-serif text-lg md:text-xl">Serene Retreat</p>
+        </div>
+      </div>
+      <div class="w-[85vw] sm:w-[60vw] md:w-[600px] h-[300px] md:h-[500px] relative group overflow-hidden rounded-sm snap-center flex-shrink-0 cursor-pointer">
+        <img src="5.png" alt="Gallery" class="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-110 filter grayscale-[20%]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 md:opacity-60 md:group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute bottom-6 left-6 transform translate-y-0 md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-500">
+          <p class="text-[#d4af37] text-[10px] uppercase tracking-widest mb-1 md:mb-2">Culinary Space</p>
+          <p class="text-white font-serif text-lg md:text-xl">Designer Kitchen</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Configuration / Pricing Section EXTRAORDINARY SHOWCASE -->
+  <section id="residences" class="py-20 md:py-32 relative overflow-hidden bg-[#050505]">
+    <!-- Giant Background Text: Scaled for mobile -->
+    <div class="absolute top-[10%] lg:top-1/2 left-0 lg:-translate-y-1/2 text-[20vw] lg:text-[12vw] font-serif font-bold text-white/[0.02] whitespace-nowrap pointer-events-none z-0 tracking-tighter reveal-scale">
+      MASTERPIECE
+    </div>
+
+    <div class="max-w-7xl mx-auto px-5 md:px-12 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+        
+        <!-- Fixed Mobile Image Breakout / Floating Panel -->
+        <div class="w-full lg:w-1/2 relative group pt-8 lg:pt-0 px-2 sm:px-4 lg:px-0 reveal-left">
+          <div class="absolute -inset-2 md:-inset-4 bg-gradient-to-tr from-[#d4af37]/20 to-transparent blur-xl md:blur-2xl lg:group-hover:bg-[#d4af37]/30 transition-all duration-700 hidden sm:block"></div>
+          <img 
+            src="2.jpg" 
+            alt="Masterpiece Residence" 
+            class="relative z-10 w-full h-[350px] sm:h-[500px] md:h-[650px] object-cover rounded-sm border border-white/10 filter brightness-90 lg:group-hover:brightness-100 transition-all duration-700"
+          />
+          <!-- The floating box needs to not overflow on mobile. Made it relative/pulled up on mobile, absolute on desktop -->
+          <div class="relative -mt-10 sm:absolute sm:-bottom-6 sm:right-4 md:-bottom-10 md:-right-10 glass-panel p-5 md:p-8 z-20 border-t-2 border-l-2 border-[#d4af37]/50 shadow-2xl backdrop-blur-xl lg:group-hover:-translate-y-4 transition-transform duration-700 w-[90%] sm:w-auto mx-auto sm:mx-0 bg-[#0a0a0a]/90">
+            <h4 class="text-white text-2xl md:text-4xl lg:text-5xl font-serif mb-1 md:mb-2 drop-shadow-lg">3, 4 <span class="text-[#d4af37]">&</span> Duplex</h4>
+            <p class="text-[#d4af37] uppercase tracking-[0.2em] md:tracking-[0.3em] text-[9px] md:text-[10px] font-medium">Bespoke Residences</p>
+          </div>
+        </div>
+
+        <!-- Right side content -->
+        <div class="w-full lg:w-1/2 space-y-6 md:space-y-8 mt-8 lg:mt-0 text-center lg:text-left reveal-right">
+          <h2 class="text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#d4af37] flex items-center justify-center lg:justify-start">
+            <span class="hidden lg:block w-8 h-[1px] bg-[#d4af37] mr-4"></span>
+            Live Where India’s Future Resides
+          </h2>
+          <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight">
+            A Canvas of <br class="hidden sm:block"/><span class="italic font-light text-white/70">Unmatched Scale</span>
+          </h3>
+          <p class="text-sm md:text-lg text-white/60 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+            Step into spaces designed for the global elite. From soaring double-height ceilings to panoramic views of the GIFT City skyline, every residence is a testament to extraordinary craftsmanship and uncompromising vision.
+          </p>
+          
+          <div class="py-6 md:py-8 border-y border-white/10 my-8 md:my-10 relative overflow-hidden group cursor-default">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#d4af37]/5 to-transparent -translate-x-full lg:group-hover:translate-x-0 transition-transform duration-1000"></div>
+            <p class="text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/50 mb-2 md:mb-3 relative z-10">Curated Collection Starting From</p>
+            <p class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold gold-gradient-text relative z-10 drop-shadow-xl py-1">₹2.47 Cr*</p>
+          </div>
+
+          <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto px-6 md:px-8 py-4 bg-transparent border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-500 uppercase tracking-widest text-xs md:text-sm rounded-sm flex items-center justify-center group font-semibold">
+            Download Floorplans
+            <i data-lucide="arrow-right" class="ml-3 w-4 h-4 lg:group-hover:translate-x-2 transition-transform"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Projects Section -->
+  <section id="projects" class="py-20 md:py-32 relative bg-[#050505] border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-5 md:px-12">
+      <div class="flex items-center mb-10 md:mb-12 reveal">
+        <div class="w-1.5 h-8 md:h-10 bg-[#3b82f6] mr-4 rounded-sm"></div>
+        <h3 class="text-2xl md:text-3xl font-sans font-semibold text-white">Related Projects</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <!-- Project 1 -->
+        <a href="https://sobhahomesltd.com/residential/residential-projects-in-chennai/sobha-meritta/" target="_blank" class="group block overflow-hidden rounded-xl cursor-pointer bg-white transition-transform duration-500 hover:-translate-y-2 shadow-lg reveal" style="transition-delay: 100ms;">
+          <div class="aspect-[4/3] w-full overflow-hidden relative">
+            <img src="6.jpg" alt="Sobha Meritta" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <div class="p-5 md:p-6 text-left border-t border-gray-100">
+            <h4 class="text-lg md:text-xl font-sans font-semibold text-[#0a0a0a]">Sobha Meritta</h4>
+          </div>
+        </a>
+
+        <!-- Project 2 -->
+        <a href="https://sobhahomesltd.com/residential/residential-projects-in-chennai/sobha-blossom/" target="_blank" class="group block overflow-hidden rounded-xl cursor-pointer bg-white transition-transform duration-500 hover:-translate-y-2 shadow-lg reveal" style="transition-delay: 200ms;">
+          <div class="aspect-[4/3] w-full overflow-hidden relative">
+            <img src="7.png" alt="Sobha Blossom" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <div class="p-5 md:p-6 text-left border-t border-gray-100">
+            <h4 class="text-lg md:text-xl font-sans font-semibold text-[#0a0a0a]">Sobha Blossom</h4>
+          </div>
+        </a>
+
+        <!-- Project 3 -->
+        <a href="https://sobhahomesltd.com/residential/residential-projects-in-chennai/sobha-evergreens/" target="_blank" class="group block overflow-hidden rounded-xl cursor-pointer bg-white transition-transform duration-500 hover:-translate-y-2 shadow-lg sm:col-span-2 lg:col-span-1 sm:w-1/2 lg:w-full sm:mx-auto reveal" style="transition-delay: 300ms;">
+          <div class="aspect-[4/3] w-full overflow-hidden relative">
+            <img src="8.webp" alt="Sobha Evergreens" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <div class="p-5 md:p-6 text-left border-t border-gray-100">
+            <h4 class="text-lg md:text-xl font-sans font-semibold text-[#0a0a0a]">Sobha Evergreens</h4>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Advantage -->
+  <section id="location" class="py-20 md:py-32 relative bg-[#050505] overflow-hidden border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-5 md:px-12">
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+        <!-- Location Info (Styled like the reference image) -->
+        <div class="w-full lg:w-1/3 space-y-6 md:space-y-8 text-center lg:text-left reveal-left">
+          <div class="flex items-center justify-center lg:justify-start mb-4 md:mb-6">
+            <div class="w-1.5 h-8 md:h-10 bg-gradient-to-b from-[#bf953f] to-[#aa771c] mr-4"></div>
+            <h3 class="text-3xl md:text-4xl font-serif text-white">Location</h3>
+          </div>
+          <p class="text-white/70 font-light leading-relaxed text-sm md:text-base max-w-lg mx-auto lg:mx-0">
+            Strategically positioned at 46 H & I, Shram Marg, GIFT City. Experience unparalleled connectivity, world-class infrastructure, and a neighborhood shared by global financial leaders.
+          </p>
+          <ul class="space-y-3 md:space-y-4 mb-6 md:mb-8 text-left max-w-sm mx-auto lg:mx-0">
+            <li class="flex items-center text-xs md:text-sm font-light text-white/90">
+              <div class="w-6 md:w-8 h-[1px] bg-[#d4af37] mr-3 md:mr-4"></div>
+              5 Min to Financial District
+            </li>
+            <li class="flex items-center text-xs md:text-sm font-light text-white/90">
+              <div class="w-6 md:w-8 h-[1px] bg-[#d4af37] mr-3 md:mr-4"></div>
+              15 Min to Airport
+            </li>
+            <li class="flex items-center text-xs md:text-sm font-light text-white/90">
+              <div class="w-6 md:w-8 h-[1px] bg-[#d4af37] mr-3 md:mr-4"></div>
+              Walkable to Club & Retail
+            </li>
+          </ul>
+          <a href="https://maps.google.com/?q=SOBHA+Elysia,+GIFT+City" target="_blank" class="inline-flex items-center text-[#d4af37] text-xs md:text-sm uppercase tracking-widest font-medium hover:text-white transition-colors group">
+            Get Directions <i data-lucide="arrow-right" class="ml-2 w-3 h-3 md:w-4 md:h-4 lg:group-hover:translate-x-2 transition-transform"></i>
+          </a>
+        </div>
+        
+        <!-- Interactive Map Embed -->
+        <div class="w-full lg:w-2/3 h-[400px] md:h-[550px] rounded-sm p-2 md:p-3 bg-[#0a0a0a] border border-white/5 group relative shadow-2xl reveal-right">
+          <!-- Elegant frame overlay effect -->
+          <div class="absolute inset-0 border border-[#d4af37]/30 pointer-events-none rounded-sm z-10"></div>
+          <iframe 
+            src="https://maps.google.com/maps?q=SOBHA%20Elysia,%2046%20H%20&%20I,%20Shram%20Marg,%20Gujarat%20International%20Finance%20Tec-City,%20Gandhinagar&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="rounded-sm filter grayscale-[40%] opacity-90 lg:group-hover:grayscale-0 lg:group-hover:opacity-100 transition-all duration-700 relative z-0"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Capture Section -->
+  <section id="contact" class="py-20 md:py-32 relative bg-[#050505] overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#d4af37]/10 rounded-full blur-[100px] hidden md:block"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-[#d4af37]/10 rounded-full blur-[100px] hidden md:block"></div>
+
+    <div class="max-w-4xl mx-auto px-5 md:px-6 relative z-10 text-center reveal">
+      <h2 class="text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#d4af37] mb-3 md:mb-4">Exclusive Invitation</h2>
+      <h3 class="text-3xl sm:text-4xl md:text-6xl font-serif text-white mb-4 md:mb-6">Schedule a Private Viewing</h3>
+      <p class="text-white/60 font-light mb-8 md:mb-12 max-w-2xl mx-auto text-sm md:text-base px-4 md:px-0">
+        Register your interest to receive a personalized tour and priority access to inventory and pricing details.
+      </p>
+      
+      <form class="glass-panel p-6 sm:p-8 md:p-12 rounded-sm text-left shadow-2xl space-y-5 md:space-y-6 bg-[#0a0a0a]/90 reveal-scale" style="transition-delay: 200ms;">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <div class="space-y-1.5 md:space-y-2">
+            <label class="text-[10px] md:text-xs uppercase tracking-widest text-white/50">Full Name</label>
+            <input type="text" class="w-full bg-transparent border-b border-white/20 pb-2 md:pb-3 text-white focus:outline-none focus:border-[#d4af37] transition-colors font-light placeholder-white/20 text-sm md:text-base rounded-none" placeholder="Name Here"/>
+          </div>
+          <div class="space-y-1.5 md:space-y-2">
+            <label class="text-[10px] md:text-xs uppercase tracking-widest text-white/50">Phone Number</label>
+            <input type="tel" class="w-full bg-transparent border-b border-white/20 pb-2 md:pb-3 text-white focus:outline-none focus:border-[#d4af37] transition-colors font-light placeholder-white/20 text-sm md:text-base rounded-none" placeholder="+91 ***** *****"/>
+          </div>
+        </div>
+        <div class="space-y-1.5 md:space-y-2">
+          <label class="text-[10px] md:text-xs uppercase tracking-widest text-white/50">Email Address</label>
+          <input type="email" class="w-full bg-transparent border-b border-white/20 pb-2 md:pb-3 text-white focus:outline-none focus:border-[#d4af37] transition-colors font-light placeholder-white/20 text-sm md:text-base rounded-none" placeholder="xyz@example.com"/>
+        </div>
+        
+        <button id="submit-btn" type="button" class="w-full py-4 md:py-5 mt-6 md:mt-8 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-black font-semibold uppercase tracking-widest text-xs md:text-sm hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-300 rounded-sm">
+          Book Your Future With Sobha Now
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#020202] pt-16 md:pt-20 pb-8 md:pb-10 border-t border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-5 md:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 mb-12 md:mb-16">
+        
+        <!-- Column 1 -->
+        <div class="lg:col-span-1 reveal">
+          <div class="text-xl md:text-2xl font-serif tracking-widest font-bold uppercase gold-gradient-text mb-4 md:mb-6">
+            Sobha Offices
+          </div>
+        </div>
+        
+        <!-- Column 2: Corporate -->
+        <div class="reveal" style="transition-delay: 100ms;">
+          <h4 class="text-[#d4af37] text-[10px] md:text-xs uppercase tracking-widest mb-4 md:mb-6">Corporate Office</h4>
+          <ul class="space-y-2 text-xs md:text-sm font-light text-white/60 leading-relaxed">
+            <li class="font-medium text-white/80">SOBHA LIMITED</li>
+            <li>Sarjapur – Marthahalli Outer Ring Road (ORR)</li>
+            <li>Devarabisanahalli, Bellandur Post,</li>
+            <li>Bangalore – 560103</li>
+            <li>Karnataka, India.</li>
+            <li class="pt-2"><span class="text-white/80">Email:</span> marketing@sobhahomesltd.com</li>
+            <li><span class="text-white/80">Website:</span> sobhahomesltd.com</li>
+            <li class="pt-2"><a href="#" class="text-[#d4af37] hover:text-white transition-colors underline underline-offset-4">View Location</a></li>
+          </ul>
+        </div>
+        
+        <!-- Column 3: Dubai -->
+        <div class="reveal" style="transition-delay: 200ms;">
+          <h4 class="text-[#d4af37] text-[10px] md:text-xs uppercase tracking-widest mb-4 md:mb-6">Dubai Office</h4>
+          <ul class="space-y-2 text-xs md:text-sm font-light text-white/60 leading-relaxed">
+            <li class="font-medium text-white/80">SOBHA LIMITED</li>
+            <li>Sobha Sapphire,</li>
+            <li>Ground Floor, Al Khail Road,</li>
+            <li>Business Bay,</li>
+            <li>Dubai, U.A.E. – 125250</li>
+            <li class="pt-4 font-medium text-[10px] uppercase tracking-widest text-[#d4af37]">For Indian Properties Enquiry</li>
+            <li><span class="text-white/80">Email:</span> marketing@sobhahomesltd.com</li>
+            <li class="pt-2"><a href="#" class="text-[#d4af37] hover:text-white transition-colors underline underline-offset-4">View Location</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Italy -->
+        <div class="reveal" style="transition-delay: 300ms;">
+          <h4 class="text-[#d4af37] text-[10px] md:text-xs uppercase tracking-widest mb-4 md:mb-6">Italy Office</h4>
+          <ul class="space-y-2 text-xs md:text-sm font-light text-white/60 leading-relaxed">
+            <li class="font-medium text-white/80">SOBHA LIMITED</li>
+            <li>Via Larga, 23</li>
+            <li>Italy – 20122</li>
+            <li>Milan, Italy</li>
+            <li class="pt-4 font-medium text-[10px] uppercase tracking-widest text-[#d4af37]">For Indian Properties Enquiry</li>
+            <li><span class="text-white/80">Email:</span> marketing@sobhahomesltd.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent mb-6 md:mb-8 reveal"></div>
+      
+      <div class="flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs font-light text-white/40 tracking-wider text-center md:text-left reveal">
+        <p class="mb-4 md:mb-0">&copy; <span id="year"></span> Sobha Elysia. All Rights Reserved.</p>
+        <div class="flex space-x-4 md:space-x-6">
+          <a href="#" class="hover:text-[#d4af37] transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-[#d4af37] transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Modal Wrapper (Hidden by default) -->
+  <div id="video-modal" class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-md hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+    <!-- Close button & video container -->
+    <div class="relative w-full max-w-[400px] h-auto max-h-[90vh] mx-auto p-4 flex flex-col justify-center">
+      <button id="close-modal-btn" class="absolute -top-4 right-4 sm:-right-8 z-50 text-white/50 hover:text-[#d4af37] transition-colors bg-black/50 rounded-full p-2">
+        <i data-lucide="x" class="w-6 h-6 md:w-8 md:h-8"></i>
+      </button>
+      
+      <!-- 9:16 Aspect Ratio container -->
+      <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden border border-[#d4af37]/30 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+         <!-- Replace 'src' below with your actual YouTube or video embed link -->
+         <iframe id="residence-video" class="absolute inset-0 w-full h-full" src="Video.mp4" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-[#050505]/95', 'backdrop-blur-md', 'border-white/10');
+        navbar.classList.remove('bg-transparent', 'border-transparent');
+      } else {
+        navbar.classList.remove('bg-[#050505]/95', 'backdrop-blur-md', 'border-white/10');
+        navbar.classList.add('bg-transparent', 'border-transparent');
+      }
+    });
+
+    // Premium Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    let isMenuOpen = false;
+
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+      
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+        menuIcon.setAttribute('data-lucide', 'x');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      } else {
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        menuIcon.setAttribute('data-lucide', 'menu');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+      lucide.createIcons();
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking a link
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if(isMenuOpen) toggleMenu();
+      });
+    });
+    
+    // Video Modal Logic
+    const exploreBtn = document.getElementById('explore-btn');
+    const videoModal = document.getElementById('video-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    
+    exploreBtn.addEventListener('click', () => {
+      videoModal.classList.remove('hidden');
+      setTimeout(() => {
+        videoModal.classList.remove('opacity-0');
+      }, 10);
+      document.body.style.overflow = 'hidden'; // Stop background scrolling
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      videoModal.classList.add('opacity-0');
+      setTimeout(() => {
+        videoModal.classList.add('hidden');
+      }, 300);
+      document.body.style.overflow = ''; // Restore background scrolling
+      
+      // Stop the video when modal closes
+      const iframe = document.getElementById('residence-video');
+      const src = iframe.src;
+      iframe.src = src; 
+    });
+
+    // Intersection Observer for Scroll Animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); // Trigger only once
+        }
+      });
+    }, observerOptions);
+
+    // Select all elements with reveal classes and observe them
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    revealElements.forEach(el => {
+      observer.observe(el);
+    });
+
+    // Gallery Slider Logic
+    const gallerySlider = document.getElementById('gallery-slider');
+    const slideLeft = document.getElementById('slide-left');
+    const slideRight = document.getElementById('slide-right');
+
+    if(slideLeft && slideRight && gallerySlider) {
+      slideLeft.addEventListener('click', () => {
+        gallerySlider.scrollBy({ left: -window.innerWidth / 1.5, behavior: 'smooth' });
+      });
+      slideRight.addEventListener('click', () => {
+        gallerySlider.scrollBy({ left: window.innerWidth / 1.5, behavior: 'smooth' });
+      });
+    }
+
+    // Form Submit Simulation
+    const submitBtn = document.getElementById('submit-btn');
+    if(submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        const originalText = submitBtn.innerText;
+        submitBtn.innerHTML = 'Thank You! We will contact you soon <i data-lucide="check-circle" class="ml-2 inline w-5 h-5"></i>';
+        lucide.createIcons();
+        submitBtn.classList.remove('from-[#bf953f]', 'to-[#aa771c]', 'text-black');
+        submitBtn.classList.add('bg-green-600', 'text-white');
+        
+        setTimeout(() => {
+          submitBtn.innerText = originalText;
+          submitBtn.classList.add('from-[#bf953f]', 'to-[#aa771c]', 'text-black');
+          submitBtn.classList.remove('bg-green-600', 'text-white');
+          document.querySelector('form').reset();
+        }, 4000);
+      });
+    }
+  </script>
+</body>
+</html>
